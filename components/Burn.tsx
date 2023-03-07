@@ -109,17 +109,18 @@ export default function BurnButton() {
                 <Table.Column key={column.key}>{column.label}</Table.Column>
               )}
             </Table.Header>
-            <Table.Body items={rows}>
-              {(item) => (
-                <Table.Row key={item.key}>
-                  {columns.map((column) => (
-                    <Table.Cell css={{ width: '50%' }} key={column.key}>
-                      {item[column.key]}
-                    </Table.Cell>
-                  ))}
-                </Table.Row>
-              )}
-            </Table.Body>
+<Table.Body items={rows}>
+  {(item) => (
+    <Table.Row key={item.key}>
+      {columns.map((column) => (
+        <Table.Cell css={{ width: '50%' }} key={column.key}>
+          {(item as {[key: string]: string | number | Element | null})[column.key]}
+        </Table.Cell>
+      ))}
+    </Table.Row>
+  )}
+</Table.Body>
+
           </Table>
         </Modal.Body>
         <Modal.Footer>
