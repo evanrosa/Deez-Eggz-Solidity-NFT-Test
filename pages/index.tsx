@@ -223,26 +223,36 @@ const Home: NextPage = () => {
             </Text>
           ) : (
             <>
-              <Container >
-                <Grid.Container css={{paddingLeft:'10%', paddingRight: '10%', paddingTop: '10%', paddingBottom:'3%', textAlign:'left'}}>
+              <Container>
+                <Grid.Container
+                  css={{
+                    paddingLeft: '10%',
+                    paddingRight: '10%',
+                    paddingTop: '10%',
+                    paddingBottom: '3%',
+                    textAlign: 'left',
+                  }}
+                >
                   <Grid>
                     <Text b size={'$3xl'}>
                       Suck on Deez Eggs
                     </Text>
 
-                    
                     <Text size={'$3xl'}>
                       Deez Eggz is an art collection of 6900 generated eggz
-                      NFTs. 
-                      Will they bust open? Suck on
-                      deez eggz to find out.
+                      NFTs. Will they bust open? Suck on deez eggz to find out.
                     </Text>
                   </Grid>
                 </Grid.Container>
 
-                <Grid.Container css={{paddingLeft:'10%', paddingRight: '10%'}}>
-                  <Grid css={{ textAlign: 'left', display:'block !important' }} xs={12} sm={9}>
-                    
+                <Grid.Container
+                  css={{ paddingLeft: '10%', paddingRight: '10%' }}
+                >
+                  <Grid
+                    css={{ textAlign: 'left', display: 'block !important' }}
+                    xs={12}
+                    sm={9}
+                  >
                     <Text size={'$3xl'}>
                       A collection of 6900 randomly generated NFTs of Deez Eggz.
                     </Text>
@@ -253,9 +263,6 @@ const Home: NextPage = () => {
                     <Text b size={'$3xl'}>
                       Total Minted
                     </Text>
-
-
-                    
 
                     <div>
                       {claimedSupply && unclaimedSupply ? (
@@ -294,25 +301,31 @@ const Home: NextPage = () => {
                         </div>
                       ) : (
                         <>
-                        
-                          
-                          <div className='display'>
-                            <Button auto css={{ marginRight: '2rem' }}
+                          <div className="display">
+                            <Button
+                              auto
+                              css={{ marginRight: '2rem' }}
                               onClick={() => setQuantity(quantity - 1)}
                               disabled={quantity <= 1}
                             >
-                              <Text b size={'$3xl'}>-</Text>
+                              <Text b size={'$3xl'}>
+                                -
+                              </Text>
                             </Button>
 
                             <Text b size={'$3xl'}>
                               {quantity}
                             </Text>
 
-                            <Button auto css={{ marginLeft: '2rem' }}
+                            <Button
+                              auto
+                              css={{ marginLeft: '2rem' }}
                               onClick={() => setQuantity(quantity + 1)}
                               disabled={quantity >= maxClaimable}
                             >
-                              <Text b size={'$3xl'}>+</Text>
+                              <Text b size={'$3xl'}>
+                                +
+                              </Text>
                             </Button>
                           </div>
 
@@ -325,7 +338,7 @@ const Home: NextPage = () => {
                               </div>
                             ) : (
                               <Web3Button
-                                className='button'
+                                className="button"
                                 contractAddress={nftDrop?.getAddress() || ''}
                                 action={(cntr) => cntr.erc721.claim(quantity)}
                                 isDisabled={!canClaim || buttonLoading}
@@ -347,7 +360,7 @@ const Home: NextPage = () => {
                     </div>
                   </Grid>
                   {/* <Spacer x={13} /> */}
-                  <Grid  xs={0} sm={3}> 
+                  <Grid xs={0} sm={3}>
                     {/* Image  */}
                     <MediaRenderer
                       src={contractMetadata?.image}
