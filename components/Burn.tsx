@@ -34,7 +34,7 @@ export default function BurnButton() {
   return (
     <div>
       <Button auto color="warning" shadow onPress={handler}>
-        Open modal
+        Let&#39;;z get crackin
       </Button>
       <Modal
         closeButton
@@ -46,7 +46,7 @@ export default function BurnButton() {
         <Modal.Header>
           <Text id="modal-title" size={18}>
             <Text b size={18}>
-                BURN        
+                Burn Two Eggz to Hatch a Chick        
             </Text>
           </Text>
         </Modal.Header>
