@@ -25,7 +25,7 @@ export default function BurnButton() {
 
 
 
-  const { data,  isLoad, error } = useOwnedNFTs(
+  const { data, error } = useOwnedNFTs(
     contract,
     address,
   );
