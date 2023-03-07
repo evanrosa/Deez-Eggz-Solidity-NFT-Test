@@ -4,26 +4,39 @@ import {
   useAddress,
   useOwnedNFTs,
 } from '@thirdweb-dev/react'
-import { Modal, Input, Row, Checkbox, Button, Text } from '@nextui-org/react'
-import React from 'react'
+import {
+  Modal,
+  Input,
+  Row,
+  Checkbox,
+  Button,
+  Text,
+  Table,
+} from '@nextui-org/react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 
 const contractAddress = '0x20D9befBA69775678F0e36316dD7F31163F4A116'
 
 export default function BurnButton() {
+  const [count, setCount] = React.useState(0)
+
   const address = useAddress()
   const { contract } = useContract(contractAddress)
   const { mutate: burnNFT, isLoading } = useBurnNFT(contract)
 
   const { data, error } = useOwnedNFTs(contract, address)
+
+  console.log('data', data)
+
   const ownedNFTs = data?.map((nft) => ({
-    id: nft.metadata.tokenId,
+    id: nft.metadata.name,
     image: nft.metadata.image,
   }))
 
-  const handleBurnNFT = async () => {
+  const handleBurnNFT = async (tokenId: any) => {
     try {
-      await burnNFT({ tokenId: 0, amount: 1 })
+      await burnNFT({ tokenId: tokenId, amount: 1 })
     } catch (error) {
       console.error('Failed to burn NFT', error)
     }
@@ -36,14 +49,46 @@ export default function BurnButton() {
     console.log('closed')
   }
 
+  const [checkedItems, setCheckedItems] = useState([])
+
+  const columns = [
+    {
+      key: 'name',
+      label: 'Name',
+    },
+    {
+      key: 'image',
+      label: 'Image',
+    },
+  ]
+  console.log('ownedNFTs', ownedNFTs)
+
+  const rows = ownedNFTs?.map((nft, index) => ({
+    key: index, // add a unique identifier for the item
+    name: nft.id,
+    image: <Image src={nft.image} alt="Eggz" width={50} height={50} />,
+  }))
+
+  const handleCheck = (id: any) => {
+    const index = checkedItems.indexOf(id)
+    if (index === -1) {
+      setCheckedItems([...checkedItems, id])
+    } else {
+      const updatedItems = [...checkedItems]
+      updatedItems.splice(index, 1)
+      setCheckedItems(updatedItems)
+    }
+  }
+
   return (
     <div>
       <Button auto color="warning" shadow onPress={handler}>
-        Letz Get Crackin!
+        Fry Ur Eggz!
       </Button>
       <Modal
+        scroll
+        fullScreen
         closeButton
-        blur
         aria-labelledby="modal-title"
         open={visible}
         onClose={closeHandler}
@@ -56,53 +101,40 @@ export default function BurnButton() {
           </Text>
         </Modal.Header>
         <Modal.Body>
-          {/* 
-            Loop through all nfts in owners wallet and list out each one with a checkbox and the nft image as a thumbnail. When the user clicks the burn button, it will burn the nft that is checked but only if the user has more than 2 nfts in their wallet. If the user has less than 2 nfts in their wallet, the burn button will be disabled and the user will be prompted to buy more nfts.
-            
-             */}
-
-          {ownedNFTs?.map((nft) => (
-            <Row key={nft.id} align="center">
-              <Checkbox />
-              <Image
-                src={nft.image}
-                alt={`NFT ${nft.id}`}
-                width={50}
-                height={50}
-              />
-            </Row>
-          ))}
-
-          <Input
-            clearable
+          <Table
             bordered
-            fullWidth
-            color="primary"
-            size="lg"
-            placeholder="Email"
-          />
-          <Input
-            clearable
-            bordered
-            fullWidth
-            color="primary"
-            size="lg"
-            placeholder="Password"
-          />
-          <Row justify="space-between">
-            <Checkbox>
-              <Text size={14}>Remember me</Text>
-            </Checkbox>
-            <Text size={14}>Forgot password?</Text>
-          </Row>
+            lined
+            headerLined
+            shadow={false}
+            aria-label="NFT table"
+            css={{
+              height: 'auto',
+              minWidth: '100%',
+            }}
+            selectionMode="multiple"
+          >
+            <Table.Header columns={columns}>
+              {(column) => (
+                <Table.Column key={column.key}>{column.label}</Table.Column>
+              )}
+            </Table.Header>
+            <Table.Body items={rows}>
+              {(item) => (
+                <Table.Row key={item.key}>
+                  {columns.map((column) => (
+                    <Table.Cell css={{ width: '50%' }} key={column.key}>
+                      {item[column.key]}
+                    </Table.Cell>
+                  ))}
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table>
         </Modal.Body>
         <Modal.Footer>
           <Button auto flat color="error" onPress={closeHandler}>
             Close
           </Button>
-          {/* <Button auto onPress={closeHandler}>
-            Sign in
-          </Button> */}
 
           {ownedNFTs?.length < 2 ? (
             <Button disabled>Buy more NFTs</Button>
