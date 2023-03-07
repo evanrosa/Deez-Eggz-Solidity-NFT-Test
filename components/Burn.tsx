@@ -1,9 +1,11 @@
-import { useContract, useBurnNFT } from '@thirdweb-dev/react'
+import { useContract, useBurnNFT, useOwnedNFTs } from '@thirdweb-dev/react'
 import { Modal, Input, Row, Checkbox, Button, Text } from '@nextui-org/react'
 import React from 'react'
 
+const address: string = '0x20D9befBA69775678F0e36316dD7F31163F4A116'
+
 export default function BurnButton() {
-  const { contract } = useContract('0x20D9befBA69775678F0e36316dD7F31163F4A116')
+  const { contract } = useContract(address)
   const { mutate: burnNFT, isLoading } = useBurnNFT(contract)
 
   const handleBurnNFT = async () => {
@@ -21,6 +23,14 @@ export default function BurnButton() {
     console.log('closed')
   }
 
+
+
+  const { data,  isLoad, error } = useOwnedNFTs(
+    contract,
+    address,
+  );
+  console.log('data',data);
+
   return (
     <div>
       <Button auto color="warning" shadow onPress={handler}>
@@ -35,13 +45,27 @@ export default function BurnButton() {
       >
         <Modal.Header>
           <Text id="modal-title" size={18}>
-            Welcome to
             <Text b size={18}>
-              NextUI
+                BURN        
             </Text>
           </Text>
         </Modal.Header>
         <Modal.Body>
+
+            {/* Loop through all nfts in owners wallet and list out as checkbox
+            {data?.map((nft) => (
+                <Checkbox>
+                    <Text size={14}>{nft.tokenId}</Text>
+                </Checkbox>
+            ))}
+                
+            
+             */}
+       
+
+
+
+
           <Input
             clearable
             bordered

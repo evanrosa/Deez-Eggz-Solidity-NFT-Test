@@ -219,7 +219,7 @@ const Home: NextPage = () => {
         <div className={styles.mintInfoContainer}>
           {isLoading ? (
             <Text b size={'$3xl'}>
-              Loading... Deez Eggz in ur mouth
+              Loading... Letz get crackin!
             </Text>
           ) : (
             <>
@@ -234,13 +234,10 @@ const Home: NextPage = () => {
                   }}
                 >
                   <Grid>
-                    <Text b size={'$3xl'}>
-                      Suck on Deez Eggz
-                    </Text>
+               
 
                     <Text size={'$3xl'}>
-                      Deez Eggz is an art collection of 6900 generated eggz
-                      NFTs. Will they bust open? Suck on deez eggz to find out.
+                      What&apos;s crackin? Deez Eggz are more than your average free range source of protein. Cultivated from the greatest wl farmers this side of the Mississippi, not even Ol' McDonald could guess what&apos;s inside...
                     </Text>
                   </Grid>
                 </Grid.Container>
@@ -254,10 +251,10 @@ const Home: NextPage = () => {
                     sm={9}
                   >
                     <Text size={'$3xl'}>
-                      A collection of 6900 randomly generated NFTs of Deez Eggz.
+                      Not your average free range...
                     </Text>
                     <Text size={'$3xl'}>
-                      Who knows, maybe they will bust open... Suck on deez eggz.
+                      this is the collection of 6900 generated NFTs of Deez Eggz.
                     </Text>
 
                     <Text b size={'$3xl'}>
@@ -273,7 +270,7 @@ const Home: NextPage = () => {
                         </Text>
                       ) : (
                         <Text b size={'$3xl'}>
-                          Loading... Deez Eggz in ur mouth
+                          Loading... Letz get crackin!
                         </Text>
                       )}
                     </div>
