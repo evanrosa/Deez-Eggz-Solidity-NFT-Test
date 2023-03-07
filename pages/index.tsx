@@ -236,7 +236,7 @@ const Home: NextPage = () => {
                       A collection of 6900 randomly generated NFTs of Deez Eggz.
                     </Text>
                     <Text size={'$3xl'}>
-                      Who knows, maybe they'll hatch... Suck on deez eggz.
+                      Who knows, maybe they will hatch... Suck on deez eggz.
                     </Text>
 
                     <Text b size={'$3xl'}>
@@ -337,7 +337,7 @@ const Home: NextPage = () => {
                     </Text>
                     <Text size={'$3xl'}>
                       Deez Eggz is a collection of 6900 generated NFTs. They are
-                      literally just eggz but there's a chance they'll hatch. In
+                      literally just eggz but there is a chance they will hatch. In
                       order to hatch the eggz you must burn them. For every two
                       eggz burned you will receive one WL for the Birds Free
                       Mint. The Birds Mint will be a collection of 3450 randomly
