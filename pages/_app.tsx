@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
           <meta
             name="description"
-            content="Deez Eggz. A NFT art collection of 6900 eggz. Suck on deez eggz. Who knows, maybe they'll hatch..."
+            content="Deez Eggz. A NFT art collection of 6900 eggz. Letz get crackin!"
           />
           <meta name="keywords" content="NFT collection for Deez Eggz." />
         </Head>

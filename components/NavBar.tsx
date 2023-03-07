@@ -4,22 +4,22 @@ import Image from 'next/image'
 import os from '../public/os.svg'
 import etherscan from '../public/etherscan.svg'
 import BurnButton from './Burn'
-import { ConnectWallet, useOwnedNFTs, useContract, useAddress } from "@thirdweb-dev/react";
+import {
+  ConnectWallet,
+  useOwnedNFTs,
+  useContract,
+  useAddress,
+} from '@thirdweb-dev/react'
 
-
-const contractAddress = "0x20D9befBA69775678F0e36316dD7F31163F4A116";
-
+const contractAddress = '0x20D9befBA69775678F0e36316dD7F31163F4A116'
 
 export default function Navigation() {
-const address = useAddress();
-  const { contract } = useContract(contractAddress);
+  const address = useAddress()
+  const { contract } = useContract(contractAddress)
 
-  const { data, isLoading, error } = useOwnedNFTs(
-    contract,
-    address,
-  );
-  console.log(data?.length);
-  
+  const { data, isLoading, error } = useOwnedNFTs(contract, address)
+  console.log(data?.length)
+
   return (
     <Navbar variant="static" color="transparent">
       <Navbar.Brand>
@@ -44,17 +44,8 @@ const address = useAddress();
 
         {data && data.length > 2 ? <BurnButton /> : null}
 
-
-        
-       
-        
-
-        
-              
-      {/* <BurnButton /> */}
-      <ConnectWallet />
+        <ConnectWallet />
       </Navbar.Content>
-
     </Navbar>
   )
 }

@@ -234,10 +234,11 @@ const Home: NextPage = () => {
                   }}
                 >
                   <Grid>
-               
-
                     <Text size={'$3xl'}>
-                      What&lsquo;s crackin? Deez Eggz are more than your average free range source of protein. Cultivated from the greatest wl farmers this side of the Mississippi, not even Ol&lsquo; McDonald could guess what&lsquo;s inside...
+                      What&lsquo;s crackin? Deez Eggz are more than your average
+                      free range source of protein. Cultivated from the greatest
+                      wl farmers this side of the Mississippi, not even
+                      Ol&lsquo; McDonald could guess what&lsquo;s inside...
                     </Text>
                   </Grid>
                 </Grid.Container>
@@ -250,11 +251,10 @@ const Home: NextPage = () => {
                     xs={12}
                     sm={9}
                   >
+                    <Text size={'$3xl'}>Not your average free range...</Text>
                     <Text size={'$3xl'}>
-                      Not your average free range...
-                    </Text>
-                    <Text size={'$3xl'}>
-                      this is the collection of 6900 generated NFTs of Deez Eggz.
+                      this is the collection of 6900 generated NFTs of Deez
+                      Eggz.
                     </Text>
 
                     <Text b size={'$3xl'}>
@@ -300,7 +300,7 @@ const Home: NextPage = () => {
                         <>
                           <div className="display">
                             <Button
-                            color="warning"
+                              color="warning"
                               auto
                               css={{ marginRight: '2rem' }}
                               onClick={() => setQuantity(quantity - 1)}
@@ -316,7 +316,7 @@ const Home: NextPage = () => {
                             </Text>
 
                             <Button
-                            color="warning"
+                              color="warning"
                               auto
                               css={{ marginLeft: '2rem' }}
                               onClick={() => setQuantity(quantity + 1)}
