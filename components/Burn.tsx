@@ -69,16 +69,7 @@ export default function BurnButton() {
         image: nft.image ? <Image src={nft.image} alt="Eggz" width={50} height={50} /> : null,
     }));
 
-  const handleCheck = (id: any) => {
-    const index = checkedItems.indexOf(id)
-    if (index === -1) {
-      setCheckedItems([...checkedItems, id])
-    } else {
-      const updatedItems = [...checkedItems]
-      updatedItems.splice(index, 1)
-      setCheckedItems(updatedItems)
-    }
-  }
+
 
   return (
     <div>
