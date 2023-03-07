@@ -42,7 +42,9 @@ const address = useAddress();
           />
         </Navbar.Link>
 
-        {data?.length > 2 && <BurnButton />}
+        {data && data.length > 2 ? <BurnButton /> : null}
+
+
         
        
         
