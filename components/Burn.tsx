@@ -63,11 +63,11 @@ export default function BurnButton() {
   ]
   console.log('ownedNFTs', ownedNFTs)
 
-  const rows = ownedNFTs?.map((nft, index) => ({
-    key: index, // add a unique identifier for the item
-    name: nft.id,
-    image: <Image src={nft.image} alt="Eggz" width={50} height={50} />,
-  }))
+    const rows = ownedNFTs?.map((nft, index) => ({
+        key: index, // add a unique identifier for the item
+        name: nft.id,
+        image: nft.image ? <Image src={nft.image} alt="Eggz" width={50} height={50} /> : null,
+    }));
 
   const handleCheck = (id: any) => {
     const index = checkedItems.indexOf(id)
