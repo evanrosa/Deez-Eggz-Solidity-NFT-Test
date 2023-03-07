@@ -13,14 +13,12 @@ import {
 } from '@thirdweb-dev/react'
 import { BigNumber, utils } from 'ethers'
 import type { NextPage } from 'next'
-import Image from 'next/image'
 import { useMemo, useState } from 'react'
 import Timer from '../components/Timer'
 import styles from '../styles/Theme.module.css'
 import { parseIneligibility } from '../utils/parseIneligibility'
 import Navigation from '../components/NavBar'
-import { Text, Card, Container, Grid } from '@nextui-org/react'
-import egg from '../public/egg.gif'
+import { Text, Spacer, Container, Grid } from '@nextui-org/react'
 
 // Put Your NFT Drop Contract address from the dashboard here
 const myNftDropContractAddress = '0x20D9befBA69775678F0e36316dD7F31163F4A116'
@@ -217,132 +215,116 @@ const Home: NextPage = () => {
     <>
       <Navigation />
 
-      <Container>
-        <Grid.Container justify="center">
-          <Grid xs={4}>
-            <Text h6 size={15} css={{ mt: 0 }}>
-              {/* Image  */}
-                        <MediaRenderer
-                className={styles.image}
-                src={contractMetadata?.image}
-                alt={`${contractMetadata?.name} preview image`}
-              />
-            </Text>
-          </Grid>
-          <Grid xs={7}>
-           
-                <Text h6 size={15} css={{ mt: 0 }}>
-                  A collection of 6900 randomly generated NFTs of Deez Eggz
-                </Text>
-                     <Text h6 size={15} css={{ mt: 0 }}>
-                  Suck on deez eggz. Who knows, maybe they'll hatch...
-                </Text>
-            
-          </Grid>
-        </Grid.Container>
-      </Container>
-
       <div className={styles.container}>
         <div className={styles.mintInfoContainer}>
           {isLoading ? (
             <p>Loading...</p>
           ) : (
             <>
-              <div className={styles.infoSide}>
-                {/* Title of your NFT Collection */}
-                <h1>{contractMetadata?.name}</h1>
-                {/* Description of your NFT Collection */}
-                <p className={styles.description}>
-                  {contractMetadata?.description}
-                </p>
-              </div>
+              <Container >
+                <Grid.Container justify="center">
+                  <Grid>
+                    {/* Image  */}
+                    <MediaRenderer
+                      className={styles.image}
+                      src={contractMetadata?.image}
+                      alt={`${contractMetadata?.name} preview image`}
+                    />
+                  </Grid>
+                  <Grid>
+                    <Text size={'$3xl'}>
+                      A collection of 6900 randomly generated NFTs of Deez Eggz
+                    </Text>
+                    <Text size={'$3xl'}>
+                      Suck on deez eggz. Who knows, maybe they'll hatch...
+                    </Text>
 
-              <div className={styles.imageSide}>
-                {/* Image Preview of NFTs */}
-      
+                    <Text b size={'$3xl'}>Total Minted</Text>
 
-                {/* Amount claimed so far */}
-                <div className={styles.mintCompletionArea}>
-                  <div className={styles.mintAreaLeft}>
-                    <p>Total Minted</p>
-                  </div>
-                  <div className={styles.mintAreaRight}>
-                    {claimedSupply && unclaimedSupply ? (
-                      <p>
-                        <b>{numberClaimed}</b>
-                        {' / '}
-                        {numberTotal}
-                      </p>
-                    ) : (
-                      <p>Loading...</p>
-                    )}
-                  </div>
-                </div>
-
-                {claimConditions.data?.length === 0 ||
-                claimConditions.data?.every(
-                  (cc) => cc.maxClaimableSupply === '0'
-                ) ? (
-                  <div>
-                    <h2>
-                      This drop is not ready to be minted yet. (No claim
-                      condition set)
-                    </h2>
-                  </div>
-                ) : !activeClaimCondition.data && claimConditions.data ? (
-                  <div>
-                    <h2>Drop starts in:</h2>
-                    <Timer date={claimConditions.data[0].startTime} />
-                  </div>
-                ) : (
-                  <>
-                    <p>Quantity</p>
-                    <div className={styles.quantityContainer}>
-                      <button
-                        className={`${styles.quantityControlButton}`}
-                        onClick={() => setQuantity(quantity - 1)}
-                        disabled={quantity <= 1}
-                      >
-                        -
-                      </button>
-
-                      <h4>{quantity}</h4>
-
-                      <button
-                        className={`${styles.quantityControlButton}`}
-                        onClick={() => setQuantity(quantity + 1)}
-                        disabled={quantity >= maxClaimable}
-                      >
-                        +
-                      </button>
-                    </div>
-
-                    <div className={styles.mintContainer}>
-                      {isSoldOut ? (
-                        <div>
-                          <h2>Sold Out</h2>
-                        </div>
+                    <div>
+                      {claimedSupply && unclaimedSupply ? (
+                        <Text b size={'$3xl'}>
+                          <b>{numberClaimed}</b>
+                          {' / '}
+                          {numberTotal}
+                        </Text>
                       ) : (
-                        <Web3Button
-                          contractAddress={nftDrop?.getAddress() || ''}
-                          action={(cntr) => cntr.erc721.claim(quantity)}
-                          isDisabled={!canClaim || buttonLoading}
-                          onError={(err) => {
-                            console.error(err)
-                            alert('Error claiming NFTs')
-                          }}
-                          onSuccess={() => {
-                            setQuantity(1)
-                            alert('Successfully claimed NFTs')
-                          }}
-                        >
-                          {buttonLoading ? 'Loading...' : buttonText}
-                        </Web3Button>
+                        <p>Loading...</p>
                       )}
                     </div>
-                  </>
-                )}
-              </div>
+
+                    <div className={styles.imageSide}>
+                      {/* Amount claimed so far */}
+
+                      {claimConditions.data?.length === 0 ||
+                      claimConditions.data?.every(
+                        (cc) => cc.maxClaimableSupply === '0'
+                      ) ? (
+                        <div>
+                          <h2>
+                            This drop is not ready to be minted yet. (No claim
+                            condition set)
+                          </h2>
+                        </div>
+                      ) : !activeClaimCondition.data && claimConditions.data ? (
+                        <div>
+                          <h2>Drop starts in:</h2>
+                          <Timer date={claimConditions.data[0].startTime} />
+                        </div>
+                      ) : (
+                        <>
+                          <p>Quantity</p>
+                          <div className={styles.quantityContainer}>
+                            <button
+                              className={`${styles.quantityControlButton}`}
+                              onClick={() => setQuantity(quantity - 1)}
+                              disabled={quantity <= 1}
+                            >
+                              -
+                            </button>
+
+                            <h4>{quantity}</h4>
+
+                            <button
+                              className={`${styles.quantityControlButton}`}
+                              onClick={() => setQuantity(quantity + 1)}
+                              disabled={quantity >= maxClaimable}
+                            >
+                              +
+                            </button>
+                          </div>
+
+                          <div className={styles.mintContainer}>
+                            {isSoldOut ? (
+                              <div>
+                                <h2>Sold Out</h2>
+                              </div>
+                            ) : (
+                              <Web3Button
+                                contractAddress={nftDrop?.getAddress() || ''}
+                                action={(cntr) => cntr.erc721.claim(quantity)}
+                                isDisabled={!canClaim || buttonLoading}
+                                onError={(err) => {
+                                  console.error(err)
+                                  alert('Error claiming NFTs')
+                                }}
+                                onSuccess={() => {
+                                  setQuantity(1)
+                                  alert('Successfully claimed NFTs')
+                                }}
+                              >
+                                {buttonLoading ? 'Loading...' : buttonText}
+                              </Web3Button>
+                            )}
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    
+                  </Grid>
+                </Grid.Container>
+              </Container>
             </>
           )}
         </div>

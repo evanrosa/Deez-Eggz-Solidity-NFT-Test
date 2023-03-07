@@ -6,15 +6,15 @@ import etherscan from '../public/etherscan.svg'
 
 export default function App() {
   return (
-    <Navbar isBordered variant="static">
+    <Navbar variant="static" color='transparent'>
       <Navbar.Brand>
-        <Text b color="inherit" h1>
+        <Text b color="inherit" size={'$6xl'}>
           Deez Eggz
         </Text>
       </Navbar.Brand>
 
       <Navbar.Content>
-        <Navbar.Link color="inherit" href="#">
+        <Navbar.Link href="#">
           <Image src={os} alt="OpenSea Collection" width={50} height={50} />
         </Navbar.Link>
         <Navbar.Link color="inherit" href="#">
