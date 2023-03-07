@@ -55,3 +55,6 @@ nav {
 *::after {
   box-sizing: border-box;
 }
+.text_align_left {
+  text-align: left;
+}
