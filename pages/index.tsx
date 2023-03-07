@@ -224,7 +224,7 @@ const Home: NextPage = () => {
           ) : (
             <>
               <Container >
-                <Grid.Container css={{padding:'10%', textAlign:'left'}}>
+                <Grid.Container css={{paddingLeft:'10%', paddingRight: '10%', paddingTop: '10%', paddingBottom:'3%', textAlign:'left'}}>
                   <Grid>
                     <Text b size={'$3xl'}>
                       Suck on Deez Eggs
@@ -232,12 +232,9 @@ const Home: NextPage = () => {
 
                     
                     <Text size={'$3xl'}>
-                      Deez Eggz is an art collection of 6900 generated
-                      NFTs. They are literally just eggz but will they bust
-                      open? To find out you must burn them. For every two eggz
-                      burned you will receive one WL for the Birds Free Mint.
-                      The Birds Mint will be a collection of 3450 randomly
-                      generated NFTs that may or may not be animated. Suck on
+                      Deez Eggz is an art collection of 6900 generated eggz
+                      NFTs. 
+                      Will they bust open? Suck on
                       deez eggz to find out.
                     </Text>
                   </Grid>
