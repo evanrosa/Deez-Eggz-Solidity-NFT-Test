@@ -303,6 +303,7 @@ const Home: NextPage = () => {
                         <>
                           <div className="display">
                             <Button
+                            color="warning"
                               auto
                               css={{ marginRight: '2rem' }}
                               onClick={() => setQuantity(quantity - 1)}
@@ -318,6 +319,7 @@ const Home: NextPage = () => {
                             </Text>
 
                             <Button
+                            color="warning"
                               auto
                               css={{ marginLeft: '2rem' }}
                               onClick={() => setQuantity(quantity + 1)}
