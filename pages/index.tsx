@@ -235,7 +235,7 @@ const Home: NextPage = () => {
                 >
                   <Grid>
                     <Text b size={'$3xl'}>
-                      Suck on Deez Eggs
+                      Suck on Deez Eggz
                     </Text>
 
                     <Text size={'$3xl'}>
