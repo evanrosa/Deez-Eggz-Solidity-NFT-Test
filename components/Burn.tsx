@@ -34,7 +34,7 @@ export default function BurnButton() {
   return (
     <div>
       <Button auto color="warning" shadow onPress={handler}>
-        Let&#39;;z get crackin
+        Letz get crackin
       </Button>
       <Modal
         closeButton

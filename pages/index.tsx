@@ -237,7 +237,7 @@ const Home: NextPage = () => {
                
 
                     <Text size={'$3xl'}>
-                      What&#39;;s crackin? Deez Eggz are more than your average free range source of protein. Cultivated from the greatest wl farmers this side of the Mississippi, not even Ol' McDonald could guess what&#39;;s inside...
+                      Whats crackin? Deez Eggz are more than your average free range source of protein. Cultivated from the greatest wl farmers this side of the Mississippi, not even Ol' McDonald could guess what is inside...
                     </Text>
                   </Grid>
                 </Grid.Container>
