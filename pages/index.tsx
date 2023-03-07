@@ -232,7 +232,7 @@ const Home: NextPage = () => {
 
                     
                     <Text size={'$3xl'}>
-                      Deez Eggz is strictly an art collection of 6900 generated
+                      Deez Eggz is an art collection of 6900 generated
                       NFTs. They are literally just eggz but will they bust
                       open? To find out you must burn them. For every two eggz
                       burned you will receive one WL for the Birds Free Mint.
@@ -250,7 +250,7 @@ const Home: NextPage = () => {
                       A collection of 6900 randomly generated NFTs of Deez Eggz.
                     </Text>
                     <Text size={'$3xl'}>
-                      Who knows, maybe they will hatch... Suck on deez eggz.
+                      Who knows, maybe they will bust open... Suck on deez eggz.
                     </Text>
 
                     <Text b size={'$3xl'}>
