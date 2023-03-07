@@ -128,13 +128,13 @@ export default function BurnButton() {
             Close
           </Button>
 
-          {ownedNFTs?.length < 2 ? (
-            <Button disabled>Buy more NFTs</Button>
-          ) : (
-            <Button disabled={isLoading} onClick={handleBurnNFT}>
-              {isLoading ? 'Burning...' : 'Burn!'}
-            </Button>
-          )}
+     {ownedNFTs && ownedNFTs.length < 2 ? (
+  <Button disabled>Buy more NFTs</Button>
+) : (
+  <Button disabled={isLoading} onClick={handleBurnNFT}>
+    {isLoading ? 'Burning...' : 'Burn!'}
+  </Button>
+)}
         </Modal.Footer>
       </Modal>
     </div>
