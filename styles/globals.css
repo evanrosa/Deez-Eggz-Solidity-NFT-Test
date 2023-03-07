@@ -55,6 +55,12 @@ nav {
 *::after {
   box-sizing: border-box;
 }
-.text_align_left {
-  text-align: left;
+.display {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+.button{
+  width: 25% !important;
 }

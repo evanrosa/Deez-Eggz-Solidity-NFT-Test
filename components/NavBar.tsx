@@ -15,14 +15,15 @@ export default function App() {
 
       <Navbar.Content>
         <Navbar.Link href="#">
-          <Image src={os} alt="OpenSea Collection" width={50} height={50} />
+          <Image src={os} alt="OpenSea Collection" width={25} height={25} />
         </Navbar.Link>
+
         <Navbar.Link color="inherit" href="#">
           <Image
             src={etherscan}
             alt="Etherscan Contract"
-            width={50}
-            height={50}
+            width={25}
+            height={25}
           />
         </Navbar.Link>
       </Navbar.Content>

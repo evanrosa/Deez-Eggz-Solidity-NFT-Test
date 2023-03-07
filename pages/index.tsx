@@ -18,7 +18,7 @@ import Timer from '../components/Timer'
 import styles from '../styles/Theme.module.css'
 import { parseIneligibility } from '../utils/parseIneligibility'
 import Navigation from '../components/NavBar'
-import { Text, Spacer, Container, Grid } from '@nextui-org/react'
+import { Text, Spacer, Container, Grid, Button } from '@nextui-org/react'
 
 // Put Your NFT Drop Contract address from the dashboard here
 const myNftDropContractAddress = '0x20D9befBA69775678F0e36316dD7F31163F4A116'
@@ -218,40 +218,34 @@ const Home: NextPage = () => {
       <div className={styles.container}>
         <div className={styles.mintInfoContainer}>
           {isLoading ? (
-            <p>Loading.</p>
+            <Text b size={'$3xl'}>
+              Loading... Deez Eggz in ur mouth
+            </Text>
           ) : (
             <>
-              <Container>
-
-                <Grid.Container>
+              <Container >
+                <Grid.Container css={{padding:'10%', textAlign:'left'}}>
                   <Grid>
                     <Text b size={'$3xl'}>
                       Suck on Deez Eggs
                     </Text>
+
+                    
                     <Text size={'$3xl'}>
-                      Deez Eggz is a collection of 6900 generated NFTs. They are
-                      literally just eggz but will they hatch? To find out you must burn them. For every two
-                      eggz burned you will receive one WL for the Birds Free
-                      Mint. The Birds Mint will be a collection of 3450 randomly
+                      Deez Eggz is strictly an art collection of 6900 generated
+                      NFTs. They are literally just eggz but will they bust
+                      open? To find out you must burn them. For every two eggz
+                      burned you will receive one WL for the Birds Free Mint.
+                      The Birds Mint will be a collection of 3450 randomly
                       generated NFTs that may or may not be animated. Suck on
                       deez eggz to find out.
                     </Text>
                   </Grid>
                 </Grid.Container>
-                 <Spacer y={8} />
 
-
-                <Grid.Container justify="center">
-                  <Grid>
-                    {/* Image  */}
-                    <MediaRenderer
-                      className={styles.image}
-                      src={contractMetadata?.image}
-                      alt={`${contractMetadata?.name} preview image`}
-                    />
-                  </Grid>
-                  
-                  <Grid>
+                <Grid.Container css={{paddingLeft:'10%', paddingRight: '10%'}}>
+                  <Grid css={{ textAlign: 'left', display:'block !important' }} xs={12} sm={9}>
+                    
                     <Text size={'$3xl'}>
                       A collection of 6900 randomly generated NFTs of Deez Eggz.
                     </Text>
@@ -263,6 +257,9 @@ const Home: NextPage = () => {
                       Total Minted
                     </Text>
 
+
+                    
+
                     <div>
                       {claimedSupply && unclaimedSupply ? (
                         <Text b size={'$3xl'}>
@@ -271,11 +268,13 @@ const Home: NextPage = () => {
                           {numberTotal}
                         </Text>
                       ) : (
-                        <p>Loading...</p>
+                        <Text b size={'$3xl'}>
+                          Loading... Deez Eggz in ur mouth
+                        </Text>
                       )}
                     </div>
 
-                    <div >
+                    <div>
                       {/* Amount claimed so far */}
 
                       {claimConditions.data?.length === 0 ||
@@ -283,50 +282,53 @@ const Home: NextPage = () => {
                         (cc) => cc.maxClaimableSupply === '0'
                       ) ? (
                         <div>
-                          <h2>
+                          <Text h2 b size={'$3xl'}>
                             This drop is not ready to be minted yet. (No claim
                             condition set)
-                          </h2>
+                          </Text>
                         </div>
                       ) : !activeClaimCondition.data && claimConditions.data ? (
                         <div>
-                          <h2>Drop starts in:</h2>
+                          <Text h2 b size={'$3xl'}>
+                            Drop starts in:
+                          </Text>
+
                           <Timer date={claimConditions.data[0].startTime} />
                         </div>
                       ) : (
                         <>
-                          <Text b size={'$3xl'}>
-                            Quantity
-                          </Text>
-                          <div className={styles.quantityContainer}>
-                            <button
-                              className={`${styles.quantityControlButton}`}
+                        
+                          
+                          <div className='display'>
+                            <Button auto css={{ marginRight: '2rem' }}
                               onClick={() => setQuantity(quantity - 1)}
                               disabled={quantity <= 1}
                             >
-                              -
-                            </button>
+                              <Text b size={'$3xl'}>-</Text>
+                            </Button>
 
                             <Text b size={'$3xl'}>
                               {quantity}
                             </Text>
 
-                            <button
-                              className={`${styles.quantityControlButton}`}
+                            <Button auto css={{ marginLeft: '2rem' }}
                               onClick={() => setQuantity(quantity + 1)}
                               disabled={quantity >= maxClaimable}
                             >
-                              +
-                            </button>
+                              <Text b size={'$3xl'}>+</Text>
+                            </Button>
                           </div>
 
-                          <div className={styles.mintContainer}>
+                          <div>
                             {isSoldOut ? (
                               <div>
-                                <h2>Sold Out</h2>
+                                <Text h2 b size={'$3xl'}>
+                                  Sold Out
+                                </Text>
                               </div>
                             ) : (
                               <Web3Button
+                                className='button'
                                 contractAddress={nftDrop?.getAddress() || ''}
                                 action={(cntr) => cntr.erc721.claim(quantity)}
                                 isDisabled={!canClaim || buttonLoading}
@@ -347,9 +349,16 @@ const Home: NextPage = () => {
                       )}
                     </div>
                   </Grid>
+                  {/* <Spacer x={13} /> */}
+                  <Grid  xs={0} sm={3}> 
+                    {/* Image  */}
+                    <MediaRenderer
+                      src={contractMetadata?.image}
+                      alt={`${contractMetadata?.name} preview image`}
+                    />
+                  </Grid>
                 </Grid.Container>
               </Container>
-
             </>
           )}
         </div>
