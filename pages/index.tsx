@@ -221,7 +221,7 @@ const Home: NextPage = () => {
             <p>Loading...</p>
           ) : (
             <>
-              <Container >
+              <Container>
                 <Grid.Container justify="center">
                   <Grid>
                     {/* Image  */}
@@ -233,13 +233,15 @@ const Home: NextPage = () => {
                   </Grid>
                   <Grid>
                     <Text size={'$3xl'}>
-                      A collection of 6900 randomly generated NFTs of Deez Eggz
+                      A collection of 6900 randomly generated NFTs of Deez Eggz.
                     </Text>
                     <Text size={'$3xl'}>
-                      Suck on deez eggz. Who knows, maybe they'll hatch...
+                      Who knows, maybe they'll hatch... Suck on deez eggz.
                     </Text>
 
-                    <Text b size={'$3xl'}>Total Minted</Text>
+                    <Text b size={'$3xl'}>
+                      Total Minted
+                    </Text>
 
                     <div>
                       {claimedSupply && unclaimedSupply ? (
@@ -273,7 +275,9 @@ const Home: NextPage = () => {
                         </div>
                       ) : (
                         <>
-                          <p>Quantity</p>
+                          <Text b size={'$3xl'}>
+                            Quantity
+                          </Text>
                           <div className={styles.quantityContainer}>
                             <button
                               className={`${styles.quantityControlButton}`}
@@ -283,7 +287,9 @@ const Home: NextPage = () => {
                               -
                             </button>
 
-                            <h4>{quantity}</h4>
+                            <Text b size={'$3xl'}>
+                              {quantity}
+                            </Text>
 
                             <button
                               className={`${styles.quantityControlButton}`}
@@ -320,8 +326,24 @@ const Home: NextPage = () => {
                         </>
                       )}
                     </div>
-
-                    
+                  </Grid>
+                </Grid.Container>
+              </Container>
+              <Container>
+                <Grid.Container>
+                  <Grid>
+                    <Text b size={'$3xl'}>
+                      Suck on Deez Eggs
+                    </Text>
+                    <Text size={'$3xl'}>
+                      Deez Eggz is a collection of 6900 generated NFTs. They are
+                      literally just eggz but there's a chance they'll hatch. In
+                      order to hatch the eggz you must burn them. For every two
+                      eggz burned you will receive one WL for the Birds Free
+                      Mint. The Birds Mint will be a collection of 3450 randomly
+                      generated NFTs that may or may not be animated. Suck on
+                      deez eggz.
+                    </Text>
                   </Grid>
                 </Grid.Container>
               </Container>

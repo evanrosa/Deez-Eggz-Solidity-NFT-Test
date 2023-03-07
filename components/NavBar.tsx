@@ -6,7 +6,7 @@ import etherscan from '../public/etherscan.svg'
 
 export default function App() {
   return (
-    <Navbar variant="static" color='transparent'>
+    <Navbar variant="static" color="transparent">
       <Navbar.Brand>
         <Text b color="inherit" size={'$6xl'}>
           Deez Eggz

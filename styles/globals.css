@@ -3,16 +3,16 @@
 /* Change the values in here to match your branding */
 :root {
   /* Background color of the page */
-  --background-color: #3CC3E0;
+  --background-color: #3cc3e0;
 
   /* Color of the text/words */
   --text-color: #000;
 
   /* Main color of your brand */
-  --color-primary: #3CC3E0;
+  --color-primary: #3cc3e0;
 
   /* Secondary color of your brand */
-  --color-secondary: #3CC3E0;
+  --color-secondary: #3cc3e0;
 
   /* Which font you want to use */
   --font: 'VT323', monospace;
@@ -23,7 +23,8 @@
 /* --- Don't need to modify below here --- */
 
 /* Default design values of the entire document */
-body {
+body,
+html {
   background: var(--background-color);
   font-family: var(--font) !important;
   color: var(--text-color);
@@ -32,14 +33,14 @@ body {
   margin: 0;
   text-align: center;
 }
-p{
+p {
   font-family: var(--font) !important;
   color: var(--text-color);
 }
 nav {
   box-shadow: none !important;
 }
-.nextui-navbar-container{
+.nextui-navbar-container {
   box-shadow: none !important;
   background: var(--background-color) !important;
   font-family: var(--font) !important;
