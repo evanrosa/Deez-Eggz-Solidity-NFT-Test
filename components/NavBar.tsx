@@ -11,7 +11,7 @@ import {
   useAddress,
 } from '@thirdweb-dev/react'
 
-const contractAddress = '0x20D9befBA69775678F0e36316dD7F31163F4A116'
+const contractAddress = '0xE1AAa7fAB6bE87D606766B22749Fa588C4aADaB6'
 
 export default function Navigation() {
   const address = useAddress()

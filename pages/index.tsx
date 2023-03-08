@@ -9,6 +9,7 @@ import {
   useContract,
   useContractMetadata,
   useUnclaimedNFTSupply,
+  useTotalCirculatingSupply,
   Web3Button,
 } from '@thirdweb-dev/react'
 import { BigNumber, utils } from 'ethers'
@@ -21,10 +22,10 @@ import Navigation from '../components/NavBar'
 import { Text, Spacer, Container, Grid, Button } from '@nextui-org/react'
 
 // Put Your NFT Drop Contract address from the dashboard here
-const myNftDropContractAddress = '0x20D9befBA69775678F0e36316dD7F31163F4A116'
+const ContractAddress = '0xE1AAa7fAB6bE87D606766B22749Fa588C4aADaB6'
 
 const Home: NextPage = () => {
-  const { contract: nftDrop } = useContract(myNftDropContractAddress)
+  const { contract: nftDrop } = useContract(ContractAddress)
 
   const address = useAddress()
   const [quantity, setQuantity] = useState(1)

@@ -18,14 +18,15 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { BigNumber } from 'ethers'
 
-const contractAddress = '0x20D9befBA69775678F0e36316dD7F31163F4A116'
+const contractAddress = '0xE1AAa7fAB6bE87D606766B22749Fa588C4aADaB6'
 
 export default function BurnButton() {
   const [visible, setVisible] = React.useState(false)
   const [checkedItems, setCheckedItems] = useState([])
   const address = useAddress()
   const { contract } = useContract(contractAddress)
-  const { mutate: burnNFT, isLoading } = useBurnNFT(contract)
+  const { mutate: burnNFT, isLoading } = useBurnNFT(contract, { useNumericTokenId: true })
+
   const { data, error } = useOwnedNFTs(contract, address)
 
   const ownedNFTs = data?.map((nft) => ({
@@ -88,10 +89,14 @@ export default function BurnButton() {
         console.log('Please select pairs of NFTs to burn (2, 4, 6, etc)')
         return
       }
+      
 
       // Burn each selected NFT
       for (let i = 0; i < checkedItems.length; i++) {
-        const tokenId = checkedItems[i]  
+        const tokenId = (checkedItems[i] as unknown) as BigNumber
+        console.log('tokenId', typeof tokenId);
+        
+        console.log('tokenId value', tokenId);
 
         await burnNFT({ tokenId: tokenId, amount: 1 })
 
