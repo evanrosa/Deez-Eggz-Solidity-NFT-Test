@@ -18,7 +18,6 @@ export default function Navigation() {
   const { contract } = useContract(contractAddress)
 
   const { data, isLoading, error } = useOwnedNFTs(contract, address)
-  console.log(data?.length)
 
   return (
     <Navbar variant="static" color="transparent">
