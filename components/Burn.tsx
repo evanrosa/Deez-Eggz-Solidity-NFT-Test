@@ -4,6 +4,7 @@ import {
   useAddress,
   usenfts,
   useOwnedNFTs,
+  useContractWrite,
 } from '@thirdweb-dev/react'
 import {
   Modal,
@@ -26,14 +27,17 @@ export default function BurnButton() {
   const [visible, setVisible] = React.useState(false)
   const address = useAddress()
   const { contract } = useContract(contractAddress)
-  const { mutate: burnBatch, isLoading } = useBurnNFT(contract)
+  const { mutateAsync: burnBatch, isLoading, } = useContractWrite(
+    contract,
+    'burnBatch'
+  )
 
   const { data, error } = useOwnedNFTs(contract, address)
-  console.log('data', data)
+
 
   const nfts = data?.map((nft) => ({
     id: nft.metadata.id,
-    image: nft.metadata.image,
+    owner: nft.owner,
     quantityOwned: nft.quantityOwned,
   }))
 
@@ -43,8 +47,6 @@ export default function BurnButton() {
     setVisible(false)
     console.log('closed')
   }
-
-  console.log('nfts', nfts)
 
   const [quantity, setQuantity] = useState(0)
 
@@ -72,22 +74,9 @@ export default function BurnButton() {
         return
       }
 
-      // Check that user has selected enough NFTs to burn
-      if (quantity > nfts.length) {
-        console.log('You do not own enough NFTs to burn')
-        return
-      }
+      await burnBatch([nfts[0].owner, [nfts[0].id], [quantity]])
 
-      // Burn each selected NFT
-      for (let i = 0; i < quantity; i++) {
-        const tokenId = nfts[i].id
-        console.log('tokenId', typeof tokenId)
-
-        console.log('tokenId value', tokenId)
-
-        await burnBatch(tokenId, 1)
-      }
-
+      // Close modal
       // Trigger airdrop of "Bird" tokens
       console.log('NFTs burned successfully, triggering airdrop...')
     } catch (error) {
@@ -154,7 +143,7 @@ export default function BurnButton() {
 
           {/* Display the number of Birds that the user can mint */}
           <Text>
-            You can mint up to {nfts[0].quantityOwned / 2 || 0} FireBirdz.
+            You can mint up to {Math.floor(nfts[0].quantityOwned / 2) || 0} FireBirdz.
           </Text>
 
           {/* For every 2 NFTs burned, count 1 Bird */}
