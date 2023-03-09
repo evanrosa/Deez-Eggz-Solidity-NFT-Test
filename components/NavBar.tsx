@@ -41,7 +41,7 @@ export default function Navigation() {
           />
         </Navbar.Link>
 
-        {data && data.length > 2 ? <BurnButton /> : null}
+        {data && data[0].quantityOwned > 2 ? <BurnButton /> : null}
 
         <ConnectWallet />
       </Navbar.Content>

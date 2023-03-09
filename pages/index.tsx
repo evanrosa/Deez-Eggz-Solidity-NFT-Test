@@ -22,39 +22,54 @@ import Navigation from '../components/NavBar'
 import { Text, Spacer, Container, Grid, Button } from '@nextui-org/react'
 
 // Put Your NFT Drop Contract address from the dashboard here
-const ContractAddress = '0xE1AAa7fAB6bE87D606766B22749Fa588C4aADaB6'
+const myEditionDropContractAddress =
+  '0xE1AAa7fAB6bE87D606766B22749Fa588C4aADaB6'
+
+const tokenId = 0
 
 const Home: NextPage = () => {
-  const { contract: nftDrop } = useContract(ContractAddress)
-
   const address = useAddress()
   const [quantity, setQuantity] = useState(1)
+  const { contract: editionDrop } = useContract(myEditionDropContractAddress)
+  const { data: contractMetadata } = useContractMetadata(editionDrop)
 
-  const { data: contractMetadata } = useContractMetadata(nftDrop)
-
-  const claimConditions = useClaimConditions(nftDrop)
-
+  const claimConditions = useClaimConditions(editionDrop)
   const activeClaimCondition = useActiveClaimConditionForWallet(
-    nftDrop,
-    address || ''
+    editionDrop,
+    address,
+    tokenId
   )
-  const claimerProofs = useClaimerProofs(nftDrop, address || '')
-  const claimIneligibilityReasons = useClaimIneligibilityReasons(nftDrop, {
-    quantity,
-    walletAddress: address || '',
-  })
-  const unclaimedSupply = useUnclaimedNFTSupply(nftDrop)
-  const claimedSupply = useClaimedNFTSupply(nftDrop)
+  const claimerProofs = useClaimerProofs(editionDrop, address || '', tokenId)
+  const claimIneligibilityReasons = useClaimIneligibilityReasons(
+    editionDrop,
+    {
+      quantity,
+      walletAddress: address || '',
+    },
+    tokenId
+  )
+
+  const claimedSupply = useTotalCirculatingSupply(editionDrop, tokenId)
+
+  const totalAvailableSupply = useMemo(() => {
+    try {
+      return BigNumber.from(activeClaimCondition.data?.availableSupply || 0)
+    } catch {
+      return BigNumber.from(1_000_000)
+    }
+  }, [activeClaimCondition.data?.availableSupply])
 
   const numberClaimed = useMemo(() => {
     return BigNumber.from(claimedSupply.data || 0).toString()
   }, [claimedSupply])
 
   const numberTotal = useMemo(() => {
-    return BigNumber.from(claimedSupply.data || 0)
-      .add(BigNumber.from(unclaimedSupply.data || 0))
-      .toString()
-  }, [claimedSupply.data, unclaimedSupply.data])
+    const n = totalAvailableSupply.add(BigNumber.from(claimedSupply.data || 0))
+    if (n.gte(1_000_000)) {
+      return ''
+    }
+    return n.toString()
+  }, [totalAvailableSupply, claimedSupply])
 
   const priceToMint = useMemo(() => {
     const bnPrice = BigNumber.from(
@@ -109,11 +124,9 @@ const Home: NextPage = () => {
       }
     }
 
-    const maxAvailable = BigNumber.from(unclaimedSupply.data || 0)
-
     let max
-    if (maxAvailable.lt(bnMaxClaimable)) {
-      max = maxAvailable
+    if (totalAvailableSupply.lt(bnMaxClaimable)) {
+      max = totalAvailableSupply
     } else {
       max = bnMaxClaimable
     }
@@ -124,7 +137,7 @@ const Home: NextPage = () => {
     return max.toNumber()
   }, [
     claimerProofs.data?.maxClaimable,
-    unclaimedSupply.data,
+    totalAvailableSupply,
     activeClaimCondition.data?.maxClaimableSupply,
     activeClaimCondition.data?.maxClaimablePerWallet,
   ])
@@ -164,17 +177,9 @@ const Home: NextPage = () => {
 
   const isLoading = useMemo(() => {
     return (
-      activeClaimCondition.isLoading ||
-      unclaimedSupply.isLoading ||
-      claimedSupply.isLoading ||
-      !nftDrop
+      activeClaimCondition.isLoading || claimedSupply.isLoading || !editionDrop
     )
-  }, [
-    activeClaimCondition.isLoading,
-    nftDrop,
-    claimedSupply.isLoading,
-    unclaimedSupply.isLoading,
-  ])
+  }, [activeClaimCondition.isLoading, editionDrop, claimedSupply.isLoading])
 
   const buttonLoading = useMemo(
     () => isLoading || claimIneligibilityReasons.isLoading,
@@ -263,7 +268,7 @@ const Home: NextPage = () => {
                     </Text>
 
                     <div>
-                      {claimedSupply && unclaimedSupply ? (
+                      {claimedSupply ? (
                         <Text b size={'$3xl'}>
                           <b>{numberClaimed}</b>
                           {' / '}
@@ -339,8 +344,12 @@ const Home: NextPage = () => {
                             ) : (
                               <Web3Button
                                 className="button"
-                                contractAddress={nftDrop?.getAddress() || ''}
-                                action={(cntr) => cntr.erc721.claim(quantity)}
+                                contractAddress={
+                                  editionDrop?.getAddress() || ''
+                                }
+                                action={(cntr) =>
+                                  cntr.erc1155.claim(tokenId, quantity)
+                                }
                                 isDisabled={!canClaim || buttonLoading}
                                 onError={(err) => {
                                   console.error(err)
