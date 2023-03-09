@@ -49,18 +49,42 @@ export default function BurnButton() {
 
   console.log('nfts', nfts);
   
+  const [quantity, setQuantity] = useState(0)
 
-
-  const handleCheck = (tokenId: string | Set<React.Key>) => {
-    const index = checkedItems.indexOf(tokenId)
-    if (index === -1) {
-      setCheckedItems([...checkedItems, tokenId])
-    } else {
-      const updatedItems = [...checkedItems]
-      updatedItems.splice(index, 1)
-      setCheckedItems(updatedItems)
+  // handle button click of increment quantity. when user clicks + button, increment quantity by 1, when user clicks - button, decrease quantity by 1; but only up to the number of NFTs owned by user. If user owns 5 NFTs, they can only select 5 NFTs to burn.
+  
+    const handleIncrement = () => {
+        if (quantity < nfts[0].quantityOwned) {
+            setQuantity(quantity + 1)
+        }
     }
-  }
+
+    const handleDecrement = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1)
+        }
+    }
+
+    // handle checkbox change
+    const handleCheckboxChange = (e) => {
+        // get the id of the checkbox that was checked
+        const id = e.target.id
+
+        // if the id is in the checkedItems array, remove it, otherwise add it
+        if (checkedItems.includes(id)) {
+            setCheckedItems(checkedItems.filter((item) => item !== id))
+        } else {
+            setCheckedItems([...checkedItems, id])
+        }
+    }
+
+
+
+
+
+
+
+
 
   // handleBurnNFT, must burn two at a time to get airdrop. When user selects two eggz, put nft id in an array then loop through array and burn each one.
 
@@ -80,10 +104,6 @@ export default function BurnButton() {
         console.log('tokenId value', tokenId)
 
         await burnBatch(0, 1)
-
-        setCheckedItems((prevState) =>
-          prevState.filter((id) => id !== checkedItems[i])
-        )
       }
 
       // Trigger airdrop of "Bird" tokens
@@ -93,7 +113,6 @@ export default function BurnButton() {
     }
   }
 
-  const [quantity, setQuantity] = useState(1)
 
   return (
     <div>
@@ -123,8 +142,7 @@ export default function BurnButton() {
             color="warning"
             auto
             css={{ marginRight: '2rem' }}
-            onClick={() => setQuantity(quantity - 1)}
-            disabled={quantity <= 1}
+            onClick={handleDecrement}
           >
             <Text b size={'$3xl'}>
               -
@@ -139,7 +157,7 @@ export default function BurnButton() {
             color="warning"
             auto
             css={{ marginLeft: '2rem' }}
-            onClick={() => setQuantity(quantity + 1)}
+            onClick={handleIncrement}
           >
             <Text b size={'$3xl'}>
               +
