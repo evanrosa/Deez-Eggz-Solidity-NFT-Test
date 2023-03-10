@@ -7,7 +7,7 @@ import {
 import { Modal, Row, Button, Text, Grid } from '@nextui-org/react'
 import React, { useState } from 'react'
 import Image from 'next/image'
-
+import firebird from '../public/firebird.gif'
 const contractAddress = '0xE1AAa7fAB6bE87D606766B22749Fa588C4aADaB6'
 
 export default function BurnButton() {
@@ -214,6 +214,20 @@ export default function BurnButton() {
 						</Grid>
 					</Grid.Container>
 			</Modal.Body>
+			<Modal.Footer>
+								<Grid.Container gap={2} justify="center">
+						<Grid>
+
+
+					<Image
+						src={firebird}
+						alt="Hatch Two Eggz to Crack It into A Bird"
+						width={750}
+						height={750}
+					/>
+					</Grid>
+					</Grid.Container>
+			</Modal.Footer>
 			</Modal>
 		</div>
 	)
