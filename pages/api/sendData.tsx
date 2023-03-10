@@ -15,8 +15,6 @@ export default async function handler(
 	}
 	const body = req.body as sheetData
 
-	
-
 	try {
 		// prepare auth to google sheets
 		const auth = new google.auth.GoogleAuth({
@@ -41,7 +39,7 @@ export default async function handler(
 				values: [[body.wallet, body.amount]],
 			},
 		})
-        console.log('body', body)
+		console.log('body', body)
 
 		console.log('response', response.data)
 

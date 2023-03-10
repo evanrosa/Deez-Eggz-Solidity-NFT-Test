@@ -222,6 +222,7 @@ const Home: NextPage = () => {
 		priceToMint,
 		quantity,
 	])
+	console.log('quantity', quantity)
 
 	return (
 		<>

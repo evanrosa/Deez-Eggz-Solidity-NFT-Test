@@ -11,31 +11,30 @@ import Image from 'next/image'
 const contractAddress = '0xE1AAa7fAB6bE87D606766B22749Fa588C4aADaB6'
 
 export default function BurnButton() {
-    // Set state variables
+	// Set state variables
 	const [quantity, setQuantity] = useState(0)
 	const [wallet, setWallet] = useState('')
 	const [visible, setVisible] = React.useState(false)
-    // Get wallet address
+	// Get wallet address
 	const address = useAddress()
-    // Get contract
+	// Get contract
 	const { contract } = useContract(contractAddress)
-    // Get contract write functions
+	// Get contract write functions
 	const { mutateAsync: burnBatch, isLoading } = useContractWrite(
 		contract,
 		'burnBatch'
 	)
-    // Get owned NFTs
+	// Get owned NFTs
 	const { data, error } = useOwnedNFTs(contract, address)
 
-    // Map NFTs to an array of objects
+	// Map NFTs to an array of objects
 	const nfts = data?.map((nft) => ({
 		id: nft.metadata.id,
 		owner: nft.owner,
 		quantityOwned: nft.quantityOwned,
 	}))
 
-
-    // Set modal visibility
+	// Set modal visibility
 	const handler = () => setVisible(true)
 	const closeHandler = () => {
 		setVisible(false)
@@ -54,8 +53,8 @@ export default function BurnButton() {
 	}
 	const handleBurnNFT = async () => {
 		try {
-            // Set wallet address
-            setWallet(nfts[0].owner)
+			// Set wallet address
+			setWallet(nfts[0].owner)
 			// Check that two NFTs have been selected to burn
 			if (quantity % 2 !== 0) {
 				console.log(
@@ -63,44 +62,43 @@ export default function BurnButton() {
 				)
 				return
 			}
+			// Burn NFTs
+			await burnBatch([nfts[0].owner, [nfts[0].id], [quantity]])
 
-            // Calculate number of birds to airdrop
+			// Calculate number of birds to airdrop
 			let birdCount = 0
 			for (let i = 0; i < quantity; i += 2) {
 				birdCount += 1
 			}
 
-
-            // Send data to server
+			// Send data to server
 			const form = {
-				wallet,
+				wallet: nfts[0].owner,
 				amount: birdCount,
 			}
 
-            console.log("form", form);
-            
+			console.log('form', form)
+
 			const response = await fetch('/api/sendData', {
 				method: 'POST',
 				headers: {
-					'Accept': 'application/json',
+					Accept: 'application/json',
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify( form ),
+				body: JSON.stringify(form),
 			})
 
-            // Log response from server
+			// reset quantity
+			setQuantity(0)
+
+			// Log response from server
 
 			const content = await response.json()
 
 			alert(content.data.tableRange)
 
-            // Burn NFTs
-			await burnBatch([nfts[0].owner, [nfts[0].id], [quantity]])
-
-
 			// Close modal after burn
-			setVisible(false) 
-
+			setVisible(false)
 		} catch (error) {
 			console.error('Failed to burn NFT', error)
 		}
