@@ -123,7 +123,6 @@ export default function BurnButton() {
 			<Button
 				id="fryButton"
 				disabled={isLoading || !address}
-				auto
 				color="warning"
 				shadow
 				onPress={handler}

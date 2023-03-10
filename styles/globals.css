@@ -65,3 +65,11 @@ nav {
 .button {
 	width: 25% !important;
 }
+.connect-wallet-desktop {
+	height: inherit !important;
+	min-width: inherit !important;
+	width: 75% !important;
+}
+ul.nextui-c-jklhtj.nextui-c-ewlcFW.nextui-navbar-collapse-wrapper {
+	background: var(--background-color) !important;
+}

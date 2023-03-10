@@ -26,7 +26,6 @@ export default function Navigation() {
 					Deez Eggz
 				</Text>
 			</Navbar.Brand>
-
 			<Navbar.Content>
 				<Navbar.Link href="#" hideIn={'xs'}>
 					<Image
@@ -46,13 +45,35 @@ export default function Navigation() {
 					/>
 				</Navbar.Link>
 
-				<Navbar.Content>
+				<Navbar.Content hideIn={'xs'}>
 					<Navbar.Item>
 						<BurnButton />
 					</Navbar.Item>
 				</Navbar.Content>
 
-				<ConnectWallet />
+				<Navbar.Content hideIn={'xs'}>
+					<Navbar.Item>
+						<ConnectWallet className="connect-wallet-desktop" />
+					</Navbar.Item>
+				</Navbar.Content>
+
+				<Navbar.Toggle showIn={'xs'} aria-label="toggle navigation" />
+
+				<Navbar.Collapse
+					css={{ backgroundColor: '#3cc3e0 !important' }}
+				>
+					{!address && (
+						<Navbar.CollapseItem>
+							<Text size={'$xl'}>Must Connect Wallet!</Text>
+						</Navbar.CollapseItem>
+					)}
+					<Navbar.CollapseItem>
+						<BurnButton />
+					</Navbar.CollapseItem>
+					<Navbar.CollapseItem>
+						<ConnectWallet />
+					</Navbar.CollapseItem>
+				</Navbar.Collapse>
 			</Navbar.Content>
 		</Navbar>
 	)
