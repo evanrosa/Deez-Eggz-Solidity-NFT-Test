@@ -2,22 +2,22 @@
 
 /* Change the values in here to match your branding */
 :root {
-  /* Background color of the page */
-  --background-color: #3cc3e0;
+	/* Background color of the page */
+	--background-color: #3cc3e0;
 
-  /* Color of the text/words */
-  --text-color: #000;
+	/* Color of the text/words */
+	--text-color: #000;
 
-  /* Main color of your brand */
-  --color-primary: #3cc3e0;
+	/* Main color of your brand */
+	--color-primary: #3cc3e0;
 
-  /* Secondary color of your brand */
-  --color-secondary: #3cc3e0;
+	/* Secondary color of your brand */
+	--color-secondary: #3cc3e0;
 
-  /* Which font you want to use */
-  --font: 'VT323', monospace;
+	/* Which font you want to use */
+	--font: 'VT323', monospace;
 
-  /* Color of the border around items */
+	/* Color of the border around items */
 }
 
 /* --- Don't need to modify below here --- */
@@ -25,42 +25,42 @@
 /* Default design values of the entire document */
 body,
 html {
-  background: var(--background-color);
-  font-family: var(--font) !important;
-  color: var(--text-color);
+	background: var(--background-color);
+	font-family: var(--font) !important;
+	color: var(--text-color);
 
-  display: flex;
-  margin: 0;
-  text-align: center;
+	display: flex;
+	margin: 0;
+	text-align: center;
 }
 p {
-  font-family: var(--font) !important;
-  color: var(--text-color);
+	font-family: var(--font) !important;
+	color: var(--text-color);
 }
 nav {
-  box-shadow: none !important;
+	box-shadow: none !important;
 }
 .nextui-navbar-container {
-  box-shadow: none !important;
-  background: var(--background-color) !important;
-  font-family: var(--font) !important;
-  color: var(--text-color);
-  display: flex;
-  margin: 0;
-  text-align: center;
+	box-shadow: none !important;
+	background: var(--background-color) !important;
+	font-family: var(--font) !important;
+	color: var(--text-color);
+	display: flex;
+	margin: 0;
+	text-align: center;
 }
 /* Box sizing rules */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 .display {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  margin-bottom: 3rem;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	margin-bottom: 3rem;
 }
 .button {
-  width: 25% !important;
+	width: 25% !important;
 }

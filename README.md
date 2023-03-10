@@ -4,9 +4,9 @@ In this example, you can create your own NFT Drop minting page just by customisi
 
 ## Tools
 
-- [**NFT Drop**](https://portal.thirdweb.com/pre-built-contracts/nft-drop): to create a lazy-minted ERC721 NFT Collection that our users can claim.
-- [**React SDK**](https://docs.thirdweb.com/react): to enable users to connect their wallets with the [useMetamask](https://portal.thirdweb.com/react/react.usemetamask) hook, and access hooks such as [useNFTDrop](https://portal.thirdweb.com/react/react.usenftdrop) to interact with the NFT drop contract.
-- [**TypeScript SDK**](https://docs.thirdweb.com/typescript): to view the claimed supply, total supply, and mint NFTs from the drop.
+-   [**NFT Drop**](https://portal.thirdweb.com/pre-built-contracts/nft-drop): to create a lazy-minted ERC721 NFT Collection that our users can claim.
+-   [**React SDK**](https://docs.thirdweb.com/react): to enable users to connect their wallets with the [useMetamask](https://portal.thirdweb.com/react/react.usemetamask) hook, and access hooks such as [useNFTDrop](https://portal.thirdweb.com/react/react.usenftdrop) to interact with the NFT drop contract.
+-   [**TypeScript SDK**](https://docs.thirdweb.com/typescript): to view the claimed supply, total supply, and mint NFTs from the drop.
 
 ## Using This Repo
 
@@ -32,11 +32,11 @@ You can fully customize the colors and style of this template by editing the val
 
 You can configure:
 
-- The color of the background with `--background-color`
-- The color of the text with `--text-color`
-- The color of the button (is a gradient from primary to secondary color) with `--color-primary` and `--color-secondary`
-- The font with `--font`
-- The border colors with `--border-color`
+-   The color of the background with `--background-color`
+-   The color of the text with `--text-color`
+-   The color of the button (is a gradient from primary to secondary color) with `--color-primary` and `--color-secondary`
+-   The font with `--font`
+-   The border colors with `--border-color`
 
 ### 3. Plug in your NFT Drop contract address
 
