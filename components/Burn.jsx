@@ -43,14 +43,10 @@ export default function BurnButton() {
 
 	// handleIncrement, handleDecrement, and handleBurnNFT are all functions that are called when the user clicks the +, -, or burn button.
 	const handleIncrement = () => {
-		if (
-			nfts?.[0]?.quantityOwned !== undefined &&
-			quantity < nfts[0].quantityOwned
-		) {
+		if (quantity < nfts[0].quantityOwned) {
 			setQuantity(quantity + 1)
 		}
 	}
-
 	const handleDecrement = () => {
 		if (quantity > 1) {
 			setQuantity(quantity - 1)
@@ -121,14 +117,14 @@ export default function BurnButton() {
 			>
 				<Modal.Header>
 					<Text id="modal-title" size={18}>
-						<Text b size={18}>
+						<Text b css={{ textAlign: 'center', fontSize: '$6xl' }}>
 							Burn Two Eggz to Crack It into A Bird
 						</Text>
 					</Text>
 				</Modal.Header>
 				<Modal.Body>
 					<Grid.Container gap={2} justify="center">
-						<Grid xs={4}>
+						<Grid>
 							<div className="display">
 								<Button
 									color="warning"
@@ -158,42 +154,66 @@ export default function BurnButton() {
 							</div>
 						</Grid>
 					</Grid.Container>
+					<Grid.Container gap={2} justify="center">
+						<Grid>
+							{/* Display quantity / 2 as user increments. no half or .5 */}
 
-					{/* Display quantity / 2 as user increments. no half or .5 */}
+							<Text
+								css={{ textAlign: 'center', fontSize: '$4xl' }}
+							>
+								You have selected {Math.floor(quantity / 2)}{' '}
+								Birdz.
+							</Text>
 
-					<Text>
-						You have selected {Math.floor(quantity / 2)} Birdz.
-					</Text>
+							{/* Display the number of Birds that the user can mint */}
 
-					{/* Display the number of Birds that the user can mint */}
+							<Text
+								css={{ textAlign: 'center', fontSize: '$2xl' }}
+							>
+								Please select pairs of NFTs to burn (2, 4, 6,
+								etc). You will be able to claim your FireBirdz
+								after the burn is complete.
+							</Text>
 
-					<Text>
-						Please select pairs of NFTs to burn (2, 4, 6, etc). You
-						will be able to claim your FireBirdz after the burn is
-						complete.
-					</Text>
+							{/* For every 2 NFTs burned, count 1 Bird */}
+						</Grid>
+					</Grid.Container>
+				
+				
+					<Grid.Container gap={2} justify="center">
+						<Grid>
+							{/* Display quantity / 2 as user increments. no half or .5 */}
 
-					{/* For every 2 NFTs burned, count 1 Bird */}
-				</Modal.Body>
-				<Modal.Footer>
-					<Button auto flat color="error" onPress={closeHandler}>
-						Close
-					</Button>
+							<Button
+							size="xl"
+								auto
+								flat
+								color="primary"
+								onPress={closeHandler}
+							>
+								Close
+							</Button>
 
-					{/* Disable the Burn button if the user doesn't own enough NFTs */}
-
-					<Button
-						auto
-						color="error"
-						shadow
-						disabled={
-							isLoading || quantity < 2 || quantity % 2 !== 0
-						}
-						onPress={handleBurnNFT}
-					>
-						{isLoading ? 'Burning...' : 'Burn!'}
-					</Button>
-				</Modal.Footer>
+							{/* Disable the Burn button if the user doesn't own enough NFTs */}
+						</Grid>
+						<Grid>
+							<Button
+							size="xl"
+								auto
+								color="error"
+								shadow
+								disabled={
+									isLoading ||
+									quantity < 2 ||
+									quantity % 2 !== 0
+								}
+								onPress={handleBurnNFT}
+							>
+								{isLoading ? 'Burning...' : 'Burn!'}
+							</Button>
+						</Grid>
+					</Grid.Container>
+			</Modal.Body>
 			</Modal>
 		</div>
 	)
