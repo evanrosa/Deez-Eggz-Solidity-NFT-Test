@@ -28,11 +28,12 @@ export default function BurnButton() {
 	const { data, error } = useOwnedNFTs(contract, address)
 
 	// Map NFTs to an array of objects
-	const nfts = data?.map((nft) => ({
-        id: nft.metadata.id,
-        owner: nft.owner,
-        quantityOwned: nft.quantityOwned,
-    })) || [];
+	const nfts =
+		data?.map((nft) => ({
+			id: nft.metadata.id,
+			owner: nft.owner,
+			quantityOwned: nft.quantityOwned,
+		})) || []
 
 	// Set modal visibility
 	const handler = () => setVisible(true)
@@ -42,10 +43,14 @@ export default function BurnButton() {
 
 	// handleIncrement, handleDecrement, and handleBurnNFT are all functions that are called when the user clicks the +, -, or burn button.
 	const handleIncrement = () => {
-		if (quantity < nfts[0].quantityOwned) {
+		if (
+			nfts?.[0]?.quantityOwned !== undefined &&
+			quantity < nfts[0].quantityOwned
+		) {
 			setQuantity(quantity + 1)
 		}
 	}
+
 	const handleDecrement = () => {
 		if (quantity > 1) {
 			setQuantity(quantity - 1)
@@ -57,9 +62,8 @@ export default function BurnButton() {
 			setWallet(nfts[0].owner)
 			// Check that two NFTs have been selected to burn
 			if (quantity % 2 !== 0) {
-				console.log(
-					'Please select pairs of NFTs to burn (2, 4, 6, etc)'
-				)
+				// alert user that they need to select two NFTs
+				alert('Please select two NFTs to burn')
 				return
 			}
 			// Burn NFTs
@@ -76,8 +80,6 @@ export default function BurnButton() {
 				wallet: nfts[0].owner,
 				amount: birdCount,
 			}
-
-			console.log('form', form)
 
 			const response = await fetch('/api/sendData', {
 				method: 'POST',
