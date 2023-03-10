@@ -178,14 +178,13 @@ export default function BurnButton() {
 							{/* For every 2 NFTs burned, count 1 Bird */}
 						</Grid>
 					</Grid.Container>
-				
-				
+
 					<Grid.Container gap={2} justify="center">
 						<Grid>
 							{/* Display quantity / 2 as user increments. no half or .5 */}
 
 							<Button
-							size="xl"
+								size="xl"
 								auto
 								flat
 								color="primary"
@@ -198,7 +197,7 @@ export default function BurnButton() {
 						</Grid>
 						<Grid>
 							<Button
-							size="xl"
+								size="xl"
 								auto
 								color="error"
 								shadow
@@ -213,21 +212,19 @@ export default function BurnButton() {
 							</Button>
 						</Grid>
 					</Grid.Container>
-			</Modal.Body>
-			<Modal.Footer>
-								<Grid.Container gap={2} justify="center">
+				</Modal.Body>
+				<Modal.Footer>
+					<Grid.Container gap={2} justify="center">
 						<Grid>
-
-
-					<Image
-						src={firebird}
-						alt="Hatch Two Eggz to Crack It into A Bird"
-						width={750}
-						height={750}
-					/>
-					</Grid>
+							<Image
+								src={firebird}
+								alt="Hatch Two Eggz to Crack It into A Bird"
+								width={750}
+								height={750}
+							/>
+						</Grid>
 					</Grid.Container>
-			</Modal.Footer>
+				</Modal.Footer>
 			</Modal>
 		</div>
 	)
