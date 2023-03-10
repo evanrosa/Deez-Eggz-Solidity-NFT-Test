@@ -338,7 +338,7 @@ const Home: NextPage = () => {
                             {isSoldOut ? (
                               <div>
                                 <Text h2 b size={'$3xl'}>
-                                  Sold Out
+                                  Mint not live.
                                 </Text>
                               </div>
                             ) : (

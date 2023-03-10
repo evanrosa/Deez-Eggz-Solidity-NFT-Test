@@ -1,25 +1,12 @@
 import {
   useContract,
-  useBurnNFT,
   useAddress,
-  usenfts,
   useOwnedNFTs,
   useContractWrite,
 } from '@thirdweb-dev/react'
-import {
-  Modal,
-  Input,
-  Row,
-  Checkbox,
-  Button,
-  Text,
-  Table,
-  useAsyncList,
-  Grid,
-} from '@nextui-org/react'
+import { Modal, Row, Button, Text, Grid } from '@nextui-org/react'
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { BigNumber } from 'ethers'
 
 const contractAddress = '0xE1AAa7fAB6bE87D606766B22749Fa588C4aADaB6'
 
@@ -27,13 +14,12 @@ export default function BurnButton() {
   const [visible, setVisible] = React.useState(false)
   const address = useAddress()
   const { contract } = useContract(contractAddress)
-  const { mutateAsync: burnBatch, isLoading, } = useContractWrite(
+  const { mutateAsync: burnBatch, isLoading } = useContractWrite(
     contract,
     'burnBatch'
   )
 
   const { data, error } = useOwnedNFTs(contract, address)
-
 
   const nfts = data?.map((nft) => ({
     id: nft.metadata.id,
@@ -74,9 +60,19 @@ export default function BurnButton() {
         return
       }
 
-      await burnBatch([nfts[0].owner, [nfts[0].id], [quantity]])
+      /* await burnBatch([nfts[0].owner, [nfts[0].id], [quantity]]) */
 
-      // Close modal
+      let birdCount = 0
+
+      for (let i = 0; i < quantity; i += 2) {
+        birdCount += 1
+      }
+
+      console.log('birdCount', birdCount)
+
+      // Close modal after burn
+      setVisible(false)
+
       // Trigger airdrop of "Bird" tokens
       console.log('NFTs burned successfully, triggering airdrop...')
     } catch (error) {
@@ -142,8 +138,10 @@ export default function BurnButton() {
           <Text>You have selected {Math.floor(quantity / 2)} Birdz.</Text>
 
           {/* Display the number of Birds that the user can mint */}
+
           <Text>
-            You can mint up to {Math.floor(nfts[0].quantityOwned / 2) || 0} FireBirdz.
+            Please select pairs of NFTs to burn (2, 4, 6, etc). You will be able
+            to claim your FireBirdz after the burn is complete.
           </Text>
 
           {/* For every 2 NFTs burned, count 1 Bird */}
@@ -159,12 +157,7 @@ export default function BurnButton() {
             auto
             color="error"
             shadow
-            disabled={
-              isLoading ||
-              quantity < 2 ||
-              quantity % 2 !== 0 ||
-              quantity > nfts[0].quantityOwned
-            }
+            disabled={isLoading || quantity < 2 || quantity % 2 !== 0}
             onPress={handleBurnNFT}
           >
             {isLoading ? 'Burning...' : 'Burn!'}
