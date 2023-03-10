@@ -39,10 +39,6 @@ export default async function handler(
 				values: [[body.wallet, body.amount]],
 			},
 		})
-		console.log('body', body)
-
-		console.log('response', response.data)
-
 		return res.status(200).json({ data: response.data })
 	} catch (error) {
 		res.status(500).send({ error: error })

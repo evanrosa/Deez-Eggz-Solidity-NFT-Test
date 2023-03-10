@@ -33,6 +33,7 @@ html {
 	margin: 0;
 	text-align: center;
 }
+
 p {
 	font-family: var(--font) !important;
 	color: var(--text-color);

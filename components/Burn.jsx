@@ -9,6 +9,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import firebird from '../public/firebird.gif'
 const contractAddress = '0xE1AAa7fAB6bE87D606766B22749Fa588C4aADaB6'
+import { useEffect } from 'react'
 
 export default function BurnButton() {
 	// Set state variables
@@ -102,9 +103,31 @@ export default function BurnButton() {
 		}
 	}
 
+	useEffect(() => {
+		// Set the specified date and time (March 15th 2023 at 3:00 PM)
+		const specifiedDate = new Date('March 10, 2023 15:21:00')
+		const button = document.getElementById('fryButton')
+
+		// Check if the current date and time is later than the specified date and time
+		if (new Date() <= specifiedDate) {
+			// If the current date and time is earlier than the specified date and time, hide the button
+			button.style.display = 'none'
+		} else {
+			// If the current date and time is later than the specified date and time, show the button
+			button.style.display = 'block'
+		}
+	}, [])
+
 	return (
 		<div>
-			<Button auto color="warning" shadow onPress={handler}>
+			<Button
+				id="fryButton"
+				disabled={isLoading || !address}
+				auto
+				color="warning"
+				shadow
+				onPress={handler}
+			>
 				Fry Ur Eggz!
 			</Button>
 			<Modal
@@ -215,9 +238,7 @@ export default function BurnButton() {
 				</Modal.Body>
 				<Modal.Footer>
 					<Grid.Container gap={2} justify="center">
-						<Grid>
-							{/* Image here */}
-						</Grid>
+						<Grid>{/* Image here */}</Grid>
 					</Grid.Container>
 				</Modal.Footer>
 			</Modal>
