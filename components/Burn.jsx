@@ -118,7 +118,7 @@ export default function BurnButton() {
 				<Modal.Header>
 					<Text id="modal-title" size={18}>
 						<Text b css={{ textAlign: 'center', fontSize: '$6xl' }}>
-							Burn Two Eggz to Crack It into A Bird
+							Hatch Two Eggz to Crack It into A Bird
 						</Text>
 					</Text>
 				</Modal.Header>
@@ -216,12 +216,7 @@ export default function BurnButton() {
 				<Modal.Footer>
 					<Grid.Container gap={2} justify="center">
 						<Grid>
-							<Image
-								src={firebird}
-								alt="Hatch Two Eggz to Crack It into A Bird"
-								width={750}
-								height={750}
-							/>
+							{/* Image here */}
 						</Grid>
 					</Grid.Container>
 				</Modal.Footer>
