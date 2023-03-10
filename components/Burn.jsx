@@ -105,7 +105,7 @@ export default function BurnButton() {
 
 	useEffect(() => {
 		// Set the specified date and time (March 15th 2023 at 3:00 PM)
-		const specifiedDate = new Date('March 10, 2023 15:21:00')
+		const specifiedDate = new Date('March 10, 2023 15:48:00')
 		const button = document.getElementById('fryButton')
 
 		// Check if the current date and time is later than the specified date and time

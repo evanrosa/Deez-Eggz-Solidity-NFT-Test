@@ -46,7 +46,11 @@ export default function Navigation() {
 					/>
 				</Navbar.Link>
 
-				<BurnButton />
+				<Navbar.Content>
+					<Navbar.Item>
+						<BurnButton />
+					</Navbar.Item>
+				</Navbar.Content>
 
 				<ConnectWallet />
 			</Navbar.Content>
