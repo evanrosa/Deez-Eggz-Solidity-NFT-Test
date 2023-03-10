@@ -29,10 +29,10 @@ export default function BurnButton() {
 
 	// Map NFTs to an array of objects
 	const nfts = data?.map((nft) => ({
-		id: nft.metadata.id,
-		owner: nft.owner,
-		quantityOwned: nft.quantityOwned,
-	}))
+        id: nft.metadata.id,
+        owner: nft.owner,
+        quantityOwned: nft.quantityOwned,
+    })) || [];
 
 	// Set modal visibility
 	const handler = () => setVisible(true)
