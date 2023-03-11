@@ -79,7 +79,7 @@ export default function BurnButton() {
 			const response = await fetch('/api/sendData', {
 				method: 'POST',
 				headers: {
-					Accept: 'application/json',
+					'Accept': 'application/json',
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(form),
@@ -91,6 +91,8 @@ export default function BurnButton() {
 			// Log response from server
 
 			const content = await response.json()
+
+			console.log(content.data);
 
 			alert(content.data.tableRange)
 
