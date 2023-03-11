@@ -14,7 +14,6 @@ import { useEffect } from 'react'
 export default function BurnButton() {
 	// Set state variables
 	const [quantity, setQuantity] = useState(0)
-	const [wallet, setWallet] = useState('')
 	const [visible, setVisible] = React.useState(false)
 	// Get wallet address
 	const address = useAddress()
@@ -55,8 +54,7 @@ export default function BurnButton() {
 	}
 	const handleBurnNFT = async () => {
 		try {
-			// Set wallet address
-			setWallet(nfts[0].owner)
+
 			// Check that two NFTs have been selected to burn
 			if (quantity % 2 !== 0) {
 				// alert user that they need to select two NFTs
@@ -64,7 +62,7 @@ export default function BurnButton() {
 				return
 			}
 			// Burn NFTs
-			await burnBatch([nfts[0].owner, [nfts[0].id], [quantity]])
+			await burnBatch([address, [nfts[0].id], [quantity]])
 
 			// Calculate number of birds to airdrop
 			let birdCount = 0
@@ -74,7 +72,7 @@ export default function BurnButton() {
 
 			// Send data to server
 			const form = {
-				wallet: nfts[0].owner,
+				wallet: address,
 				amount: birdCount,
 			}
 
@@ -138,10 +136,11 @@ export default function BurnButton() {
 				onClose={closeHandler}
 			>
 				<Modal.Header>
-					<Text id="modal-title" size={18}>
-						<Text b css={{ textAlign: 'center', fontSize: '$6xl' }}>
-							Hatch Two Eggz to Crack It into A Bird
-						</Text>
+					<Text hideIn={'xs'} b id="modal-title" css={{ textAlign: 'center', fontSize: '$6xl' }}>
+						Hatch Two Eggz to Crack It into A Bird
+					</Text>
+					<Text showIn={'xs'} b id="modal-title" css={{ textAlign: 'center', fontSize: '$3xl' }}>
+						Hatch Two Eggz to Crack It into A Bird
 					</Text>
 				</Modal.Header>
 				<Modal.Body>
