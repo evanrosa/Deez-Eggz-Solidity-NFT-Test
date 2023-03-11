@@ -369,7 +369,7 @@ const Home: NextPage = () => {
 																marginRight:
 																	'2rem',
 															}}
-															onClick={() =>
+															onPress={() =>
 																setQuantity(
 																	quantity - 1
 																)
@@ -397,7 +397,7 @@ const Home: NextPage = () => {
 																marginLeft:
 																	'2rem',
 															}}
-															onClick={() =>
+															onPress={() =>
 																setQuantity(
 																	quantity + 1
 																)

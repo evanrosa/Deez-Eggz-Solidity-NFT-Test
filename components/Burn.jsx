@@ -135,7 +135,7 @@ export default function BurnButton() {
 		<div>
 			<Button
 				id="fryButton"
-				disabled={isLoading || !address}
+  				disabled={isLoading || !address || nfts.length === 0} // Update the disabled prop
 				color="warning"
 				shadow
 				onPress={handler}
@@ -176,7 +176,7 @@ export default function BurnButton() {
 									color="warning"
 									auto
 									css={{ marginRight: '2rem' }}
-									onClick={handleDecrement}
+									onPress={handleDecrement}
 								>
 									<Text b size={'$3xl'}>
 										-
@@ -191,7 +191,7 @@ export default function BurnButton() {
 									color="warning"
 									auto
 									css={{ marginLeft: '2rem' }}
-									onClick={handleIncrement}
+									onPress={handleIncrement}
 								>
 									<Text b size={'$3xl'}>
 										+
