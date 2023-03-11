@@ -15,6 +15,7 @@ export default function BurnButton() {
 	// Set state variables
 	const [burnSuccess, setBurnSuccess] = useState(false) // Add new state variable
 	const [burnedQuantity, setBurnedQuantity] = useState(0)
+	const [isBurning, setIsBurning] = useState(false) // Add new state variable
 
 	const [quantity, setQuantity] = useState(0)
 	const [visible, setVisible] = React.useState(false)
@@ -42,14 +43,14 @@ export default function BurnButton() {
 	const handler = () => setVisible(true)
 	const closeHandler = () => {
 		setVisible(false)
+		setIsBurning(false) // Reset isBurning state variable
 	}
 
 	useEffect(() => {
 		if (!visible) {
 			setBurnSuccess(false)
 		}
-		}, [setVisible, visible])
-
+	}, [setVisible, visible])
 
 	// handleIncrement, handleDecrement, and handleBurnNFT are all functions that are called when the user clicks the +, -, or burn button.
 	const handleIncrement = () => {
@@ -70,6 +71,9 @@ export default function BurnButton() {
 				alert('Please select two NFTs to burn')
 				return
 			}
+
+			setIsBurning(true) // Set isBurning to true when burn starts
+
 			// Burn NFTs
 			await burnBatch([address, [nfts[0].id], [quantity]])
 			setBurnSuccess(true)
@@ -107,6 +111,8 @@ export default function BurnButton() {
 			console.log(content.data)
 		} catch (error) {
 			console.error('Failed to burn NFT', error)
+		} finally {
+			setIsBurning(false) // Set isBurning to false when burn completes
 		}
 	}
 
@@ -124,7 +130,6 @@ export default function BurnButton() {
 			button.style.display = 'block'
 		}
 	}, [])
-	
 
 	return (
 		<div>
@@ -256,7 +261,7 @@ export default function BurnButton() {
 
 					<Grid.Container gap={2} justify="center">
 						<Grid>
-							{burnSuccess && (
+							{burnSuccess && !isBurning && (
 								<Text
 									b
 									color="success"
@@ -268,6 +273,21 @@ export default function BurnButton() {
 									Burn successful! {address} has been recorded
 									with {burnedQuantity} Birdz. You may close
 									this window now.
+								</Text>
+							)}
+
+							{isBurning && (
+								<Text
+									b
+									color="warning"
+									css={{
+										textAlign: 'center',
+										fontSize: '$2xl',
+										marginBottom: '2rem',
+									}}
+								>
+									Burning your NFTs. Please do not close the
+									window.
 								</Text>
 							)}
 						</Grid>
