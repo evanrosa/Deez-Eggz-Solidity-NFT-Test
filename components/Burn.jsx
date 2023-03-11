@@ -249,7 +249,7 @@ export default function BurnButton() {
 								}
 								onPress={handleBurnNFT}
 							>
-								{isLoading ? 'Burning...' : 'Burn!'}
+								{isLoading ? '🔥🔥🔥' : 'Burn!'}
 							</Button>
 						</Grid>
 					</Grid.Container>
