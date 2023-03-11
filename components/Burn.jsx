@@ -13,6 +13,9 @@ import { useEffect } from 'react'
 
 export default function BurnButton() {
 	// Set state variables
+	const [burnSuccess, setBurnSuccess] = useState(false) // Add new state variable
+	const [burnedQuantity, setBurnedQuantity] = useState(0)
+
 	const [quantity, setQuantity] = useState(0)
 	const [visible, setVisible] = React.useState(false)
 	// Get wallet address
@@ -41,6 +44,13 @@ export default function BurnButton() {
 		setVisible(false)
 	}
 
+	useEffect(() => {
+		if (!visible) {
+			setBurnSuccess(false)
+		}
+		}, [setVisible, visible])
+
+
 	// handleIncrement, handleDecrement, and handleBurnNFT are all functions that are called when the user clicks the +, -, or burn button.
 	const handleIncrement = () => {
 		if (quantity < nfts[0].quantityOwned) {
@@ -54,7 +64,6 @@ export default function BurnButton() {
 	}
 	const handleBurnNFT = async () => {
 		try {
-
 			// Check that two NFTs have been selected to burn
 			if (quantity % 2 !== 0) {
 				// alert user that they need to select two NFTs
@@ -63,6 +72,7 @@ export default function BurnButton() {
 			}
 			// Burn NFTs
 			await burnBatch([address, [nfts[0].id], [quantity]])
+			setBurnSuccess(true)
 
 			// Calculate number of birds to airdrop
 			let birdCount = 0
@@ -79,11 +89,13 @@ export default function BurnButton() {
 			const response = await fetch('/api/sendData', {
 				method: 'POST',
 				headers: {
-					'Accept': 'application/json',
+					Accept: 'application/json',
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(form),
 			})
+
+			setBurnedQuantity(Math.floor(quantity / 2))
 
 			// reset quantity
 			setQuantity(0)
@@ -92,12 +104,7 @@ export default function BurnButton() {
 
 			const content = await response.json()
 
-			console.log(content.data);
-
-			alert(content.data.tableRange)
-
-			// Close modal after burn
-			setVisible(false)
+			console.log(content.data)
 		} catch (error) {
 			console.error('Failed to burn NFT', error)
 		}
@@ -117,6 +124,7 @@ export default function BurnButton() {
 			button.style.display = 'block'
 		}
 	}, [])
+	
 
 	return (
 		<div>
@@ -138,10 +146,20 @@ export default function BurnButton() {
 				onClose={closeHandler}
 			>
 				<Modal.Header>
-					<Text hideIn={'xs'} b id="modal-title" css={{ textAlign: 'center', fontSize: '$6xl' }}>
+					<Text
+						hideIn={'xs'}
+						b
+						id="modal-title"
+						css={{ textAlign: 'center', fontSize: '$6xl' }}
+					>
 						Hatch Two Eggz to Crack It into A Bird
 					</Text>
-					<Text showIn={'xs'} b id="modal-title" css={{ textAlign: 'center', fontSize: '$3xl' }}>
+					<Text
+						showIn={'xs'}
+						b
+						id="modal-title"
+						css={{ textAlign: 'center', fontSize: '$3xl' }}
+					>
 						Hatch Two Eggz to Crack It into A Bird
 					</Text>
 				</Modal.Header>
@@ -233,6 +251,25 @@ export default function BurnButton() {
 							>
 								{isLoading ? 'Burning...' : 'Burn!'}
 							</Button>
+						</Grid>
+					</Grid.Container>
+
+					<Grid.Container gap={2} justify="center">
+						<Grid>
+							{burnSuccess && (
+								<Text
+									b
+									color="success"
+									css={{
+										textAlign: 'center',
+										fontSize: '$2xl',
+									}}
+								>
+									Burn successful! {address} has been recorded
+									with {burnedQuantity} Birdz. You may close
+									this window now.
+								</Text>
+							)}
 						</Grid>
 					</Grid.Container>
 				</Modal.Body>
