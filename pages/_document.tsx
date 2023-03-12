@@ -25,6 +25,7 @@ class MyDocument extends Document {
 					{CssBaseline.flush()},{' '}
 					{/* Google Tag Manager code snippet */}
 					<Script
+						strategy="afterInteractive"
 						id="tracking-script"
 						dangerouslySetInnerHTML={{
 							__html: `
