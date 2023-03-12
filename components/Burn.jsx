@@ -135,8 +135,7 @@ export default function BurnButton() {
 		<div>
 			<Button
 				id="fryButton"
-				className='fryButton'
-				disabled={isLoading || !address || nfts.length === 0} // Update the disabled prop
+  				disabled={isLoading || !address || nfts.length === 0} // Update the disabled prop
 				color="warning"
 				shadow
 				onPress={handler}
@@ -244,7 +243,6 @@ export default function BurnButton() {
 						</Grid>
 						<Grid>
 							<Button
-								className='burnButton'
 								size="xl"
 								auto
 								color="error"
