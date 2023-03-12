@@ -135,7 +135,7 @@ export default function BurnButton() {
 		<div>
 			<Button
 				id="fryButton"
-  				disabled={isLoading || !address || nfts.length === 0} // Update the disabled prop
+				disabled={isLoading || !address || nfts.length === 0} // Update the disabled prop
 				color="warning"
 				shadow
 				onPress={handler}

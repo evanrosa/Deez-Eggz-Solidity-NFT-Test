@@ -3,6 +3,7 @@ import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react'
 import '../styles/globals.css'
 import Head from 'next/head'
 import { NextUIProvider } from '@nextui-org/react'
+import Script from 'next/script'
 
 // This is the chainId your dApp will work on.
 const activeChainId = ChainId.Goerli
