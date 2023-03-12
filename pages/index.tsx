@@ -432,7 +432,7 @@ const Home: NextPage = () => {
 															</div>
 														) : (
 															<Web3Button
-																className="button"
+																className="button mint-button"
 																contractAddress={
 																	editionDrop?.getAddress() ||
 																	''
